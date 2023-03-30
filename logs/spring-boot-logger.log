@@ -1,9 +1,0 @@
-2023-03-30 18:38:11,411 INFO com.mongodb.diagnostics.logging.SLF4JLogger [cluster-ClusterId{value='641d07efe3e8532d12cae61e', description='null'}-localhost:27017] Exception in monitor thread while connecting to server localhost:27017
-com.mongodb.MongoNodeIsRecoveringException: Command failed with error 11600 (InterruptedAtShutdown): 'interrupted at shutdown' on server localhost:27017. The full response is {"ok": 0.0, "errmsg": "interrupted at shutdown", "code": 11600, "codeName": "InterruptedAtShutdown"}
-	at com.mongodb.internal.connection.ProtocolHelper.createSpecialException(ProtocolHelper.java:266)
-	at com.mongodb.internal.connection.ProtocolHelper.getCommandFailureException(ProtocolHelper.java:194)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:413)
-	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:369)
-	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:221)
-	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:157)
-	at java.base/java.lang.Thread.run(Thread.java:829)
