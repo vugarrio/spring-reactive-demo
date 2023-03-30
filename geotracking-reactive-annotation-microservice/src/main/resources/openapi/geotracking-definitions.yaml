@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+    title: Demo geo-tracking service REST API
+    description: Geo tracking API
+    version: 0.0.1
+
+servers:
+    - url: http://localhost:8081
+      description: Generated server url
+
+tags:
+    - name: Tracking
+      description: The tracking API
+
+
+security:
+    - bearerAuth: []
+
+paths:
+    /tracks:
+        post:
+            tags:
+                - Tracking
+            summary: Process a track
+            operationId: processTrack
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Track'
+            responses:
+                "201":
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TrackRef'
+                "400":
+                    description: Bad input parameters.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+
+components:
+    schemas:
+
+        Track:
+            description: Is a sequence of consecutive points from a user
+            type: object
+            required:
+                - deviceId
+                - user
+                - points
+            properties:
+                deviceId:
+                    description: id device sent the track
+                    type: string
+                    example: 1111222XXXXXXX
+                user:
+                    description: User of the tracking
+                    type: string
+                    example: W99999
+                points:
+                    description: GeoPoins of the tracking. Minimum of 2 Points required
+                    type: array
+                    minItems: 2
+                    items:
+                        $ref: '#/components/schemas/GeoPoint'
+
+        GeoPoint:
+            description: geo point
+            type: object
+            required:
+                - timestamp
+                - point
+            properties:
+                timestamp:
+                    description: timestamp of the GeoPoint.
+                    type: string
+                    format: date-time
+                    example: 1975-07-05T07:30:00Z
+                point:
+                    $ref: '#/components/schemas/Geolocation'
+
+        Geolocation:
+            description: Geolocation coordinates
+            type: object
+            required:
+                - longitude
+                - latitude
+            properties:
+                longitude:
+                    type: number
+                    format: double
+                    example: -8.255816
+                latitude:
+                    type: number
+                    format: double
+                    example: 43.459947
+
+        TrackRef:
+            description: Is a sequence of consecutive points from a user
+            type: object
+            properties:
+                trackId:
+                    description: id of the tracking
+                    type: string
+                    example: 6130dd549efc2a5c3edfd916
+
+
+        Audit:
+            description: Audit data
+            type: object
+            properties:
+                modifiedBy:
+                    description: User who made the last modification on the entity
+                    type: string
+                    example: W99999
+                modifiedAt:
+                    description: Last modification date
+                    type: string
+                    format: date-time
+                    example: 1975-07-05T07:30:00Z
+                createdBy:
+                    description: The user id who created de entity
+                    type: string
+                    example: W99999
+                createdAt:
+                    description: Creation date
+                    type: string
+                    format: date-time
+                    example: 1975-07-05T07:30:00Z
+
+
+
+
+        # Pagination
+        Pagination:
+            description: Pagination information. In the case that the payload of the response includes several pages of results
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Index of the current page
+                    example: 2
+                size:
+                    type: integer
+                    description: Number of items per page
+                    example: 10
+                totalElements:
+                    type: integer
+                    format: int64
+                    description: Total number of items found
+                    example: 25
+                totalPages:
+                    type: integer
+                    description: Total number of pages found
+                    example: 3
+                numberOfElements:
+                    type: integer
+                    description: Number of items on the current page
+                    example: 5
+                next:
+                    description: Pagination key or index of the next page of results
+                    type: integer
+                    example: 2
+                previous:
+                    description: Pagination key or index of the previous page of results
+                    type: integer
+                    example: 1
+                sort:
+                    description: Pagination sorting criteria
+                    type: array
+                    items:
+                        type: string
+                    example: ["date.desc","title.asc"]
+
+
+        Error:
+            description: error info
+            required:
+                - timestamp
+            type: object
+            properties:
+                timestamp:
+                    type: string
+                    format: date-time
+                    example: "1975-07-05T07:30:00Z"
+                status:
+                    type: integer
+                    format: int32
+                error:
+                    type: string                
+                message:
+                    type: string
+                path:
+                    type: string
