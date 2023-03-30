@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "local"
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/curso_webflux
+
+logging:
+  level:
+    #root: DEBUG
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG     #DEBUG #ERROR
+    org.springframework.data.mongodb.repository.query: DEBUG       #DEBUG #ERROR
+
+

@@ -23,6 +23,7 @@
 	<modules>
 		<module>geotracking-reactive-functional-microservice</module>
 		<module>geotracking-reactive-annotation-microservice</module>
+		<module>geotracking-synchronous-microservice</module>
 	</modules>
 
 </project>
