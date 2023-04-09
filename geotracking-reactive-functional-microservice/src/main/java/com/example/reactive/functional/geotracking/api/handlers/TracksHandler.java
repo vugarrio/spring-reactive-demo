@@ -24,11 +24,8 @@ public class TracksHandler {
     public Mono<ServerResponse> processTrack(ServerRequest request) {
         return request.bodyToMono(TrackDTO.class)
                 .doOnNext(track -> validatorHandler.validate(track))
-//                .flatMap(
-//                        geoPointService::processTrack
-//                )
-                .flatMap(p ->
-                        geoPointService.processTrack(p)
+                .flatMap(
+                        geoPointService::processTrack
                 )
                 .flatMap(cust -> ServerResponse.ok().contentType(APPLICATION_JSON).body(fromValue(cust)));
     }

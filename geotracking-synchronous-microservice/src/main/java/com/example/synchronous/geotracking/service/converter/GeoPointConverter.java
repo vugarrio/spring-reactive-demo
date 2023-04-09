@@ -1,8 +1,8 @@
-package com.example.reactive.functional.geotracking.service.converter;
+package com.example.synchronous.geotracking.service.converter;
 
-import com.example.reactive.functional.geotracking.domain.entity.GeoPoint;
-import com.example.reactive.functional.geotracking.dto.GeoPointDTO;
-import com.example.reactive.functional.geotracking.dto.GeolocationDTO;
+import com.example.synchronous.geotracking.domain.entity.GeoPoint;
+import com.example.synchronous.geotracking.dto.GeoPointDTO;
+import com.example.synchronous.geotracking.dto.GeolocationDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -64,7 +64,7 @@ public interface GeoPointConverter {
 
     //@Named("buildGeoJsonPoint")
     default GeoJsonPoint map (GeoPointDTO dto) {
-        return new org.springframework.data.mongodb.core.geo.GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
+        return new GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
     }
 
 }

@@ -10,8 +10,7 @@ public class GeoPointServiceException extends Exception {
 
     public GeoPointServiceException(Throwable cause) { super(cause); }
 
-    public GeoPointServiceException(String message, Throwable cause, boolean enableSuppression,
-                                    boolean writableStackTrace) {
+    public GeoPointServiceException(String message, Throwable cause, boolean enableSuppression,boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

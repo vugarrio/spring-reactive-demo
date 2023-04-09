@@ -46,7 +46,7 @@ public class WebfluxRestControllerAdvice {
 
     @ExceptionHandler(ResponseStatusException.class)
     public Mono<ErrorDTO> exceptionHandler(ResponseStatusException ex, ServerWebExchange serverWebExchange) {
-        LOGGER.debug("WebExceptionHandler, message: {}, type: {}", ex.getMessage(), ex.toString());
+        LOGGER.debug("exceptionHandler, message: {}, type: {}", ex.getMessage(), ex.toString());
         ErrorDTO error = new ErrorDTO();
         error.setStatus(ex.getRawStatusCode());
         error.setError(ex.getReason());

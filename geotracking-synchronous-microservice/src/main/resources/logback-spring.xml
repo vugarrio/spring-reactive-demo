@@ -34,8 +34,8 @@
         <appender-ref ref="Console" />
     </root>
 
-    <!-- LOG "com.example.reactive.functional.geotracking*" at TRACE level -->
-    <logger name="com.example.reactive.functional.geotracking" level="trace" additivity="false">
+    <!-- LOG "com.example.synchronous.geotracking*" at TRACE level -->
+    <logger name="com.example.synchronous.geotracking" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
