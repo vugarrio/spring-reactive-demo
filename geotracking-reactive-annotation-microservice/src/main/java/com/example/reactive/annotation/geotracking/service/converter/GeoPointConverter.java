@@ -2,7 +2,9 @@ package com.example.reactive.annotation.geotracking.service.converter;
 
 import com.example.reactive.annotation.geotracking.domain.entity.GeoPoint;
 import com.example.reactive.annotation.geotracking.dto.GeoPointDTO;
+import com.example.reactive.annotation.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.dto.GeolocationDTO;
+import com.example.reactive.annotation.geotracking.dto.UserGeoPointResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -28,11 +30,9 @@ public interface GeoPointConverter {
 
     GeoPointDTO toDto(GeoPoint entity);
 
-    //UserGeoPointResponseDTO toUserGeoPointResponseDTO(GeoPoint entry);
+    UserGeoPointResponseDTO toUserGeoPointResponseDTO(GeoPoint entry);
 
-   // GeoPointResponseDTO toGeoPointResponseDTO(GeoPoint entry);
-
-
+    GeoPointResponseDTO toGeoPointResponseDTO(GeoPoint entry);
 
 
 
@@ -51,8 +51,6 @@ public interface GeoPointConverter {
     }
 
 
-
-
     /*
      * Convers dates
      */
@@ -68,5 +66,7 @@ public interface GeoPointConverter {
     default GeoJsonPoint map (GeoPointDTO dto) {
         return new org.springframework.data.mongodb.core.geo.GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
     }
+
+
 
 }

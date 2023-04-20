@@ -101,6 +101,7 @@ public class WebfluxRestControllerAdvice {
                                    ServerWebExchange serverWebExchange) {
         error.setTimestamp(OffsetDateTime.now());
         error.setPath(serverWebExchange.getRequest().getPath().toString());
+        serverWebExchange.getResponse().setStatusCode(httpStatus);
         serverWebExchange.getResponse().getHeaders().setContentType(mediaType);
         return Mono.just(error);
     }

@@ -1,5 +1,6 @@
 package com.example.reactive.annotation.geotracking.service.impl;
 
+import com.example.reactive.annotation.geotracking.dto.UserGeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.service.GeoPointService;
 import com.example.reactive.annotation.geotracking.service.converter.GeoPointConverter;
 import com.example.reactive.annotation.geotracking.domain.entity.GeoPoint;
@@ -56,5 +57,17 @@ public class GeoPointServiceImpl implements GeoPointService {
         return savedGeos.then(
                 Mono.just(trackRefDTO)
         );
+    }
+
+    @Override
+    public Mono<UserGeoPointResponseDTO> getLastPositionByDeviceId(String deviceId) {
+        return geoPointRepository.getFirstByDeviceIdOrderByTimestampDesc(deviceId)
+                .map(geoPointconverter::toUserGeoPointResponseDTO);
+    }
+
+    @Override
+    public Mono<UserGeoPointResponseDTO> getLastPositionByUser(String user) {
+        return geoPointRepository.getFirstByUserOrderByTimestampDesc(user)
+                .map(geoPointconverter::toUserGeoPointResponseDTO);
     }
 }

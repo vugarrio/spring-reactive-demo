@@ -1,11 +1,15 @@
 package com.example.reactive.annotation.geotracking.service;
 
+import com.example.reactive.annotation.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackRefDTO;
+import com.example.reactive.annotation.geotracking.dto.UserGeoPointResponseDTO;
 import org.springframework.validation.annotation.Validated;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Geo-tracking service interface.
@@ -22,4 +26,29 @@ public interface GeoPointService {
      */
     Mono<TrackRefDTO> processTrack(@Valid TrackDTO track);
 
+
+    /**
+     * Gets the user geo-tracking points registered between to dates
+     * @param criteria
+     *
+     * @return flux GeoPointResponseDTO
+     */
+    /////////////todo  Flux<GeoPointResponseDTO> findGeoPointByParameters(SearchTrackByCriteria criteria);
+
+    /**
+     * Get the last geo point of a device
+     * @param deviceId
+     *
+     * @return geo point item
+     */
+    Mono<UserGeoPointResponseDTO> getLastPositionByDeviceId(@NotEmpty String deviceId);
+
+
+    /**
+     * Get the last geo point of a user
+     * @param user
+     *
+     * @return geo point item
+     */
+    Mono<UserGeoPointResponseDTO> getLastPositionByUser(@NotEmpty String user);
 }
