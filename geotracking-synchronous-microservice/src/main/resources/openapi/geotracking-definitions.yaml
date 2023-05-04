@@ -42,6 +42,95 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Error'
 
+
+        get:
+            tags:
+                - Tracking
+            summary: Get the track of a user in a time interval
+            operationId: getTrackByParams
+            parameters:
+                -   name: user
+                    in: query
+                    description: User Id
+                    required: true
+                    schema:
+                        type: string
+                    example: W99999
+                -   name: dateFrom
+                    in: query
+                    description: Track start date
+                    required: true
+                    schema:
+                        type: string
+                        format: date-time
+                    example: "1975-07-05T07:30:00Z"
+                -   name: dateTo
+                    in: query
+                    description: Track start date
+                    required: true
+                    schema:
+                        type: string
+                        format: date-time
+                    example: "1975-07-05T07:30:00Z"
+
+            responses:
+                "200":
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/GeoPointResponse'
+                "204":
+                    description: Empty results.
+                "400":
+                    description: Bad input parameters.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+
+
+    /tracks/lastPosition:
+        get:
+            tags:
+                - Tracking
+            summary: Get the last position of a device or user
+            description: Get the last position of a device, you can filter by user or by deviceId. But it is mandatory to filter by one of the two parameters.
+            operationId: getLastPosition
+            parameters:
+                -   name: user
+                    in: query
+                    description: User Id
+                    required: false
+                    schema:
+                        type: string
+                    example: W99999
+                -   name: deviceId
+                    in: query
+                    description: Divice Id
+                    required: false
+                    schema:
+                        type: string
+                    example: 1111222XXXXXXX
+
+            responses:
+                "200":
+                    description: Return one GeoPoint user item
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GeoPointResponse'
+                "204":
+                    description: Empty results.
+                "400":
+                    description: Bad input parameters.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+
 components:
     schemas:
 
@@ -66,9 +155,9 @@ components:
                     type: array
                     minItems: 2
                     items:
-                        $ref: '#/components/schemas/GeoPoint'
+                        $ref: '#/components/schemas/Point'
 
-        GeoPoint:
+        Point:
             description: geo point
             type: object
             required:
@@ -109,72 +198,139 @@ components:
                     example: 6130dd549efc2a5c3edfd916
 
 
-        Audit:
-            description: Audit data
+        GeoPointResponse:
+            description: Return one GeoPoint user item
             type: object
             properties:
-                modifiedBy:
-                    description: User who made the last modification on the entity
+                id:
+                    description: GeoPoint identifier
+                    type: string
+                    example: 641b94f35188c84d89373e99
+                trackId:
+                    description: GeoPoint identifier
+                    type: string
+                    example: 641b94f35188c84d89373e99
+                user:
+                    description: User of the tracking
                     type: string
                     example: W99999
-                modifiedAt:
-                    description: Last modification date
+                deviceId:
+                    description: id device sent the track
+                    type: string
+                    example: 1111222XXXXXXX
+                timestamp:
+                    description: timestamp of the GeoPoint.
                     type: string
                     format: date-time
                     example: 1975-07-05T07:30:00Z
-                createdBy:
-                    description: The user id who created de entity
-                    type: string
-                    example: W99999
-                createdAt:
-                    description: Creation date
-                    type: string
-                    format: date-time
-                    example: 1975-07-05T07:30:00Z
+                point:
+                    $ref: '#/components/schemas/Geolocation'
+
+
+                      # TrackResponse:
+                      #     description: Return one GeoPoint user item
+                      #     type: object
+                      #     properties:
+                      #         user:
+                      #             description: User of the tracking
+                      #             type: string
+                      #             example: W99999
+                      #         points:
+                      #             description: GeoPoins of the tracking
+                      #             type: array
+                      #             minItems: 2
+                      #             items:
+                    #                 $ref: '#/components/schemas/GeoPointResponse'
+
+
+        # GeoPointResponse:
+        #     description: geo point
+        #     type: object
+        #     properties:
+        #         id:
+        #             description: GeoPoint identifier
+        #             type: string
+        #             example: 641b94f35188c84d89373e99
+        #         deviceId:
+        #             description: id device sent the track
+        #             type: string
+        #             example: 1111222XXXXXXX
+        #         timestamp:
+        #             description: timestamp of the GeoPoint.
+        #             type: string
+        #             format: date-time
+        #             example: 1975-07-05T07:30:00Z
+        #         point:
+        #             $ref: '#/components/schemas/Geolocation'
+
+
+        # todo: eliminar
+        # Audit:
+        #     description: Audit data
+        #     type: object
+        #     properties:
+        #         modifiedBy:
+        #             description: User who made the last modification on the entity
+        #             type: string
+        #             example: W99999
+        #         modifiedAt:
+        #             description: Last modification date
+        #             type: string
+        #             format: date-time
+        #             example: 1975-07-05T07:30:00Z
+        #         createdBy:
+        #             description: The user id who created de entity
+        #             type: string
+        #             example: W99999
+        #         createdAt:
+        #             description: Creation date
+        #             type: string
+        #             format: date-time
+        #             example: 1975-07-05T07:30:00Z
 
 
 
 
-        # Pagination
-        Pagination:
-            description: Pagination information. In the case that the payload of the response includes several pages of results
-            type: object
-            properties:
-                page:
-                    type: integer
-                    description: Index of the current page
-                    example: 2
-                size:
-                    type: integer
-                    description: Number of items per page
-                    example: 10
-                totalElements:
-                    type: integer
-                    format: int64
-                    description: Total number of items found
-                    example: 25
-                totalPages:
-                    type: integer
-                    description: Total number of pages found
-                    example: 3
-                numberOfElements:
-                    type: integer
-                    description: Number of items on the current page
-                    example: 5
-                next:
-                    description: Pagination key or index of the next page of results
-                    type: integer
-                    example: 2
-                previous:
-                    description: Pagination key or index of the previous page of results
-                    type: integer
-                    example: 1
-                sort:
-                    description: Pagination sorting criteria
-                    type: array
-                    items:
-                        type: string
-                    example: ["date.desc","title.asc"]
+        # Pagination todo:eliminar
+        # Pagination:
+        #     description: Pagination information. In the case that the payload of the response includes several pages of results
+        #     type: object
+        #     properties:
+        #         page:
+        #             type: integer
+        #             description: Index of the current page
+        #             example: 2
+        #         size:
+        #             type: integer
+        #             description: Number of items per page
+        #             example: 10
+        #         totalElements:
+        #             type: integer
+        #             format: int64
+        #             description: Total number of items found
+        #             example: 25
+        #         totalPages:
+        #             type: integer
+        #             description: Total number of pages found
+        #             example: 3
+        #         numberOfElements:
+        #             type: integer
+        #             description: Number of items on the current page
+        #             example: 5
+        #         next:
+        #             description: Pagination key or index of the next page of results
+        #             type: integer
+        #             example: 2
+        #         previous:
+        #             description: Pagination key or index of the previous page of results
+        #             type: integer
+        #             example: 1
+        #         sort:
+        #             description: Pagination sorting criteria
+        #             type: array
+        #             items:
+        #                 type: string
+        #             example: ["date.desc","title.asc"]
 
 
         Error:
@@ -191,7 +347,7 @@ components:
                     type: integer
                     format: int32
                 error:
-                    type: string                
+                    type: string
                 message:
                     type: string
                 path:

@@ -1,12 +1,15 @@
 package com.example.reactive.functional.geotracking.service.impl;
 
+import com.example.reactive.functional.geotracking.common.util.DateUtil;
 import com.example.reactive.functional.geotracking.domain.entity.GeoPoint;
 import com.example.reactive.functional.geotracking.domain.repository.GeoPointRepository;
+import com.example.reactive.functional.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.functional.geotracking.dto.TrackDTO;
 import com.example.reactive.functional.geotracking.dto.TrackRefDTO;
 import com.example.reactive.functional.geotracking.exception.GeoPointServiceException;
 import com.example.reactive.functional.geotracking.service.GeoPointService;
 import com.example.reactive.functional.geotracking.service.converter.GeoPointConverter;
+import com.example.reactive.functional.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -55,5 +58,27 @@ public class GeoPointServiceImpl implements GeoPointService {
         return savedGeos.then(
                 Mono.just(trackRefDTO)
         );
+    }
+
+    @Override
+    public Flux<GeoPointResponseDTO> findGeoPointByParameters(SearchTrackByCriteria criteria) {
+        LOGGER.debug(":: findGeoPointByParameters :: Param [criteria:{}]", criteria);
+        return geoPointRepository.findByTimestampBetweenAndUserOrderByTimestamp(
+                        DateUtil.parseToInstant(criteria.getDateFrom()),
+                        DateUtil.parseToInstant(criteria.getDateTo()),
+                        criteria.getUser())
+                .map(geoPointconverter::toGeoPointResponseDTO);
+    }
+
+    @Override
+    public Mono<GeoPointResponseDTO> getLastPositionByDeviceId(String deviceId) {
+        return geoPointRepository.getFirstByDeviceIdOrderByTimestampDesc(deviceId)
+                .map(geoPointconverter::toGeoPointResponseDTO);
+    }
+
+    @Override
+    public Mono<GeoPointResponseDTO> getLastPositionByUser(String user) {
+        return geoPointRepository.getFirstByUserOrderByTimestampDesc(user)
+                .map(geoPointconverter::toGeoPointResponseDTO);
     }
 }

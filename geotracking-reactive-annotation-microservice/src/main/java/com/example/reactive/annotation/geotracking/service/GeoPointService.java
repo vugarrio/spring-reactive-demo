@@ -1,9 +1,9 @@
 package com.example.reactive.annotation.geotracking.service;
 
+import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import com.example.reactive.annotation.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackRefDTO;
-import com.example.reactive.annotation.geotracking.dto.UserGeoPointResponseDTO;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,7 +33,7 @@ public interface GeoPointService {
      *
      * @return flux GeoPointResponseDTO
      */
-    /////////////todo  Flux<GeoPointResponseDTO> findGeoPointByParameters(SearchTrackByCriteria criteria);
+    Flux<GeoPointResponseDTO> findGeoPointByParameters(@Valid SearchTrackByCriteria criteria);
 
     /**
      * Get the last geo point of a device
@@ -41,7 +41,7 @@ public interface GeoPointService {
      *
      * @return geo point item
      */
-    Mono<UserGeoPointResponseDTO> getLastPositionByDeviceId(@NotEmpty String deviceId);
+    Mono<GeoPointResponseDTO> getLastPositionByDeviceId(@NotEmpty String deviceId);
 
 
     /**
@@ -50,5 +50,5 @@ public interface GeoPointService {
      *
      * @return geo point item
      */
-    Mono<UserGeoPointResponseDTO> getLastPositionByUser(@NotEmpty String user);
+    Mono<GeoPointResponseDTO> getLastPositionByUser(@NotEmpty String user);
 }

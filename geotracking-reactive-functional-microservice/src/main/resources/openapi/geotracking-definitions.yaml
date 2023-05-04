@@ -43,7 +43,6 @@ paths:
                                 $ref: '#/components/schemas/Error'
 
 
-
         get:
             tags:
                 - Tracking
@@ -72,7 +71,7 @@ paths:
                     schema:
                         type: string
                         format: date-time
-                    example: "1975-07-05T07:30:00Z"                 
+                    example: "1975-07-05T07:30:00Z"
 
             responses:
                 "200":
@@ -80,9 +79,11 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/TrackResponse'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/GeoPointResponse'
                 "204":
-                    description: Empty results.                    
+                    description: Empty results.
                 "400":
                     description: Bad input parameters.
                     content:
@@ -112,7 +113,7 @@ paths:
                     required: false
                     schema:
                         type: string
-                    example: 1111222XXXXXXX                    
+                    example: 1111222XXXXXXX
 
             responses:
                 "200":
@@ -120,9 +121,9 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/UserGeoPointResponse'
+                                $ref: '#/components/schemas/GeoPointResponse'
                 "204":
-                    description: Empty results.                    
+                    description: Empty results.
                 "400":
                     description: Bad input parameters.
                     content:
@@ -154,9 +155,9 @@ components:
                     type: array
                     minItems: 2
                     items:
-                        $ref: '#/components/schemas/GeoPoint'
+                        $ref: '#/components/schemas/Point'
 
-        GeoPoint:
+        Point:
             description: geo point
             type: object
             required:
@@ -197,59 +198,26 @@ components:
                     example: 6130dd549efc2a5c3edfd916
 
 
-        UserGeoPointResponse:
-            description: Return one GeoPoint user item
-            type: object
-            properties:
-                id:
-                    description: GeoPoint identifier
-                    type: string
-                    example: 641b94f35188c84d89373e99
-                user:
-                    description: User of the tracking
-                    type: string
-                    example: W99999   
-                deviceId:
-                    description: id device sent the track
-                    type: string
-                    example: 1111222XXXXXXX     
-                timestamp:
-                    description: timestamp of the GeoPoint.
-                    type: string
-                    format: date-time
-                    example: 1975-07-05T07:30:00Z    
-                point:
-                    $ref: '#/components/schemas/Geolocation'
-
-
-        TrackResponse:
-            description: Return one GeoPoint user item
-            type: object
-            properties:
-                user:
-                    description: User of the tracking
-                    type: string
-                    example: W99999   
-                points:
-                    description: GeoPoins of the tracking
-                    type: array
-                    minItems: 2
-                    items:
-                        $ref: '#/components/schemas/GeoPointResponse'       
-                        
-
         GeoPointResponse:
-            description: geo point 
+            description: Return one GeoPoint user item
             type: object
             properties:
                 id:
                     description: GeoPoint identifier
                     type: string
                     example: 641b94f35188c84d89373e99
+                trackId:
+                    description: GeoPoint identifier
+                    type: string
+                    example: 641b94f35188c84d89373e99
+                user:
+                    description: User of the tracking
+                    type: string
+                    example: W99999
                 deviceId:
                     description: id device sent the track
                     type: string
-                    example: 1111222XXXXXXX         
+                    example: 1111222XXXXXXX
                 timestamp:
                     description: timestamp of the GeoPoint.
                     type: string
@@ -257,6 +225,43 @@ components:
                     example: 1975-07-05T07:30:00Z
                 point:
                     $ref: '#/components/schemas/Geolocation'
+
+
+                      # TrackResponse:
+                      #     description: Return one GeoPoint user item
+                      #     type: object
+                      #     properties:
+                      #         user:
+                      #             description: User of the tracking
+                      #             type: string
+                      #             example: W99999
+                      #         points:
+                      #             description: GeoPoins of the tracking
+                      #             type: array
+                      #             minItems: 2
+                      #             items:
+                      #                 $ref: '#/components/schemas/GeoPointResponse'
+
+
+        # GeoPointResponse:
+        #     description: geo point
+        #     type: object
+        #     properties:
+        #         id:
+        #             description: GeoPoint identifier
+        #             type: string
+        #             example: 641b94f35188c84d89373e99
+        #         deviceId:
+        #             description: id device sent the track
+        #             type: string
+        #             example: 1111222XXXXXXX
+        #         timestamp:
+        #             description: timestamp of the GeoPoint.
+        #             type: string
+        #             format: date-time
+        #             example: 1975-07-05T07:30:00Z
+        #         point:
+        #             $ref: '#/components/schemas/Geolocation'
 
 
         # todo: eliminar
@@ -342,7 +347,7 @@ components:
                     type: integer
                     format: int32
                 error:
-                    type: string                
+                    type: string
                 message:
                     type: string
                 path:

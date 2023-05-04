@@ -1,8 +1,8 @@
 package com.example.synchronous.geotracking.service.converter;
 
 import com.example.synchronous.geotracking.domain.entity.GeoPoint;
-import com.example.synchronous.geotracking.dto.GeoPointDTO;
 import com.example.synchronous.geotracking.dto.GeolocationDTO;
+import com.example.synchronous.geotracking.dto.PointDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -24,7 +24,7 @@ public interface GeoPointConverter {
     @Mapping(target = "latitude", source="entry.y")
     GeolocationDTO toDto(GeoJsonPoint entry);
 
-    GeoPointDTO toDto(GeoPoint entity);
+    //GeoPointDTO toDto(GeoPoint entity);
 
     //UserGeoPointResponseDTO toUserGeoPointResponseDTO(GeoPoint entry);
 
@@ -34,7 +34,7 @@ public interface GeoPointConverter {
 
 
 
-    default GeoPoint toEntity(GeoPointDTO dto) {
+    default GeoPoint toEntity(PointDTO dto) {
         if ( dto == null ) {
             return null;
         }
@@ -63,7 +63,7 @@ public interface GeoPointConverter {
     }
 
     //@Named("buildGeoJsonPoint")
-    default GeoJsonPoint map (GeoPointDTO dto) {
+    default GeoJsonPoint map (PointDTO dto) {
         return new GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
     }
 

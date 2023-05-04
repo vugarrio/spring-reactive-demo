@@ -197,7 +197,6 @@
 <!--								<hideGenerationTimestamp>true</hideGenerationTimestamp>-->
 <!--								<library>spring-boot</library>-->
 							</configOptions>
-							<apiPackage>${project.groupId}.reactive.functional.geotracking.api</apiPackage>
 							<modelPackage>${project.groupId}.reactive.functional.geotracking.dto</modelPackage>
 						</configuration>
 
