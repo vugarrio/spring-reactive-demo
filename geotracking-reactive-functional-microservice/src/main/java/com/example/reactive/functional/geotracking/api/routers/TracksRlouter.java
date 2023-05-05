@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -95,6 +96,27 @@ public class TracksRlouter {
     )
     public RouterFunction<ServerResponse> getTrackByParams(TracksHandler tracksHandler) {
         return RouterFunctions.route(GET("/tracks").and(accept(APPLICATION_JSON)), tracksHandler::getTrackByParams);
+    }
+
+
+    @Bean
+    @RouterOperation(operation = @Operation(
+                    operationId = "getTrackStreamByParams",
+                    summary = "Get the track stream of a user in a time interval",
+                    tags = { "Tracking" },
+                    parameters = {
+                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = true),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateFrom", description = "Track start date", required = true, example = "2021-07-05T07:30:00Z"),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateTo", description = "Track end date", required = true, example = "2021-07-05T18:30:00Z")
+
+                    },
+                    responses = {
+                            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = GeoPointResponseDTO.class)))
+                    }
+            )
+    )
+    public RouterFunction<ServerResponse> getTrackStreamByParams(TracksHandler tracksHandler) {
+        return RouterFunctions.route(GET("/tracks/stream").and(accept(MediaType.TEXT_EVENT_STREAM)), tracksHandler::getTrackStreamsByParams);
     }
 
 }

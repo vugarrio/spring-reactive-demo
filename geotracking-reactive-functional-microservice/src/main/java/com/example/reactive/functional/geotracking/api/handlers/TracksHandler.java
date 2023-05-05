@@ -14,8 +14,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebInputException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -61,16 +63,7 @@ public class TracksHandler {
 
 
     public Mono<ServerResponse> getTrackByParams(ServerRequest request) {
-        final SearchTrackByCriteria criteria = SearchTrackByCriteria.builder()
-                .user(request.queryParam("user").orElse(null))
-                .dateFrom(request.queryParam("dateFrom")
-                        .map(DateUtil::parseToOffsetDateTime)
-                        .orElse(null))
-                .dateTo(request.queryParam("dateTo")
-                        .map(DateUtil::parseToOffsetDateTime)
-                        .orElse(null))
-                .build();
-
+        final SearchTrackByCriteria criteria = buildSearchTrackByCriteria(request);
         LOGGER.debug(":: getTrackByParams :: Params {} ", criteria);
 
         return geoPointService.findGeoPointByParameters(criteria).collectList()
@@ -81,5 +74,30 @@ public class TracksHandler {
                     } else return ServerResponse.noContent().build();
                 });
     }
+
+
+    public Mono<ServerResponse> getTrackStreamsByParams(ServerRequest request) {
+        final SearchTrackByCriteria criteria = buildSearchTrackByCriteria(request);
+        LOGGER.debug(":: getTrackStreamsByParams :: Params {} ", criteria);
+
+        return ServerResponse.ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                // delay 2 secons !!!!!!!!!!
+                .body(geoPointService.findGeoPointByParameters(criteria).delayElements(Duration.ofSeconds(2)), GeoPointResponseDTO.class)
+                .switchIfEmpty(ServerResponse.noContent().build());
+    }
+
+    private SearchTrackByCriteria buildSearchTrackByCriteria(ServerRequest request) {
+        return  SearchTrackByCriteria.builder()
+                .user(request.queryParam("user").orElse(null))
+                .dateFrom(request.queryParam("dateFrom")
+                        .map(DateUtil::parseToOffsetDateTime)
+                        .orElse(null))
+                .dateTo(request.queryParam("dateTo")
+                        .map(DateUtil::parseToOffsetDateTime)
+                        .orElse(null))
+                .build();
+    }
+
 
 }
