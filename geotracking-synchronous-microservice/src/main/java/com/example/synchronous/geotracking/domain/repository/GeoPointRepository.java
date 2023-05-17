@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 
 import java.time.Instant;
+import java.util.List;
 
 @Repository
 public interface GeoPointRepository extends MongoRepository<GeoPoint, String> {
 
-    GeoPoint findByTimestampBetweenAndUserOrderByTimestamp(Instant from, Instant to, String user);
+    List<GeoPoint> findByTimestampBetweenAndUserOrderByTimestamp(Instant from, Instant to, String user);
 
     GeoPoint getFirstByDeviceIdOrderByTimestampDesc(String deviceId);
 

@@ -63,17 +63,19 @@ public class GlobalErrorWebExceptionHandler extends ResponseEntityExceptionHandl
     }
 
 
-    @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<ErrorDTO> exceptionHandler(ResponseStatusException ex, ServerWebExchange serverWebExchange) {
-        LOGGER.debug("WebExceptionHandler, message: {}, type: {}", ex.getMessage(), ex.toString());
+
+    @ExceptionHandler(ParameterException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ResponseEntity<ErrorDTO> parameterException(ParameterException ex, WebRequest request) {
+        LOGGER.debug("parameterException, message: {}", ex.getMessage());
         ErrorDTO error = new ErrorDTO();
-        error.setStatus(ex.getRawStatusCode());
-        error.setError(ex.getReason());
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setError(HttpStatus.NOT_FOUND.getReasonPhrase());
         error.setMessage(ex.getMessage());
         error.setTimestamp(OffsetDateTime.now());
-        error.setPath(serverWebExchange.getRequest().getPath().toString());
+        error.setPath(getRequestURI(request));
 
-        return ResponseEntity.status(ex.getStatus()).contentType(DEFAULT_MEDIA_TYPE).body(error);
+        return ResponseEntity.status(BAD_REQUEST).contentType(DEFAULT_MEDIA_TYPE).body(error);
     }
 
 

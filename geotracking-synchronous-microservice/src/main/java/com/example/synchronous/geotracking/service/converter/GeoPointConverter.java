@@ -1,6 +1,7 @@
 package com.example.synchronous.geotracking.service.converter;
 
 import com.example.synchronous.geotracking.domain.entity.GeoPoint;
+import com.example.synchronous.geotracking.dto.GeoPointResponseDTO;
 import com.example.synchronous.geotracking.dto.GeolocationDTO;
 import com.example.synchronous.geotracking.dto.PointDTO;
 import org.mapstruct.Mapper;
@@ -28,9 +29,7 @@ public interface GeoPointConverter {
 
     //UserGeoPointResponseDTO toUserGeoPointResponseDTO(GeoPoint entry);
 
-   // GeoPointResponseDTO toGeoPointResponseDTO(GeoPoint entry);
-
-
+    GeoPointResponseDTO toGeoPointResponseDTO(GeoPoint entry);
 
 
 

@@ -62,7 +62,7 @@ public interface GeoPointConverter {
     }
 
     default GeoJsonPoint map (PointDTO dto) {
-        return new org.springframework.data.mongodb.core.geo.GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
+        return new GeoJsonPoint(dto.getPoint().getLongitude(), dto.getPoint().getLatitude());
     }
 
 

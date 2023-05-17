@@ -48,7 +48,7 @@ public class  TracksController implements TracksApi {
                     .map(ResponseEntity::ok)
                     .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 
-        } throw new ServerWebInputException("Some parameter does not have to be empty");
+        } else throw new ServerWebInputException("Some parameter does not have to be empty");
     }
 
     /**
@@ -64,6 +64,7 @@ public class  TracksController implements TracksApi {
 
         return Mono.just(ResponseEntity.ok(geoPointService.findGeoPointByParameters(criteria)));
 
+// todo: borrar antes de merger
 //        return geoPointService.findGeoPointByParameters(criteria)
 //                .collectList()
 //                .flatMap(list -> list.isEmpty()

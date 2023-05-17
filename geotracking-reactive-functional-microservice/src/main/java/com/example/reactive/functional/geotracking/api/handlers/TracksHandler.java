@@ -7,14 +7,12 @@ import com.example.reactive.functional.geotracking.service.GeoPointService;
 import com.example.reactive.functional.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebInputException;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
@@ -56,9 +54,7 @@ public class TracksHandler {
                                     .body(fromValue(geoPoint)))
                             .switchIfEmpty(ServerResponse.noContent().build());
 
-        } else {
-            throw new ServerWebInputException("Some parameter does not have to be empty");
-        }
+        } else throw new ServerWebInputException("Some parameter does not have to be empty");
     }
 
 
@@ -86,6 +82,8 @@ public class TracksHandler {
                 .body(geoPointService.findGeoPointByParameters(criteria).delayElements(Duration.ofSeconds(2)), GeoPointResponseDTO.class)
                 .switchIfEmpty(ServerResponse.noContent().build());
     }
+
+
 
     private SearchTrackByCriteria buildSearchTrackByCriteria(ServerRequest request) {
         return  SearchTrackByCriteria.builder()
