@@ -28,3 +28,13 @@ info:
     encoding: "@project.build.sourceEncoding@"
     java:
       version: "@java.version@"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true      
