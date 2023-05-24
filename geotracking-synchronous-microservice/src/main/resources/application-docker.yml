@@ -1,11 +1,11 @@
 spring:
   config:
     activate:
-      on-profile: "local"
+      on-profile: "docker"
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/demo_webflux
+      uri: mongodb://mongodb:27017/demo_webflux
 
 logging:
   level:

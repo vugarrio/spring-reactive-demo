@@ -16,7 +16,6 @@ public class ValidatorHandler {
     private final Validator validator;
 
     public void validate(Object pojo) {
-        String name = pojo.getClass().getName();
         Errors errors = new BeanPropertyBindingResult(pojo, pojo.getClass().getName());
         validator.validate(pojo, errors);
 

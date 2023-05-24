@@ -1,0 +1,64 @@
+version: '2'
+services:
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - demo-webflux-network
+
+
+
+  geotracking-reactive-annotation-service:
+    container_name: geotracking-reactive-annotation-service
+    build:
+      context: ../geotracking-reactive-annotation-microservice
+      dockerfile: ../geotracking-reactive-annotation-microservice/Dockerfile
+    image: geotracking-reactive-annotation-service:latest
+    ports:
+      - 8082:8082
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
+    networks:
+      - demo-webflux-network
+
+
+
+  geotracking-reactive-functional-service:
+    container_name: geotracking-reactive-functional-service
+    build:
+      context: ../geotracking-reactive-functional-microservice
+      dockerfile: ../geotracking-reactive-functional-microservice/Dockerfile
+    image: geotracking-reactive-functional-service:latest
+    ports:
+      - 8081:8081
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
+    networks:
+      - demo-webflux-network
+
+
+  geotracking-synchronous-service:
+    container_name: geotracking-synchronous-service
+    build:
+      context: ../geotracking-synchronous-microservice
+      dockerfile: ../geotracking-synchronous-microservice/Dockerfile
+    image: geotracking-synchronous-service:latest
+    ports:
+      - 8083:8083
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
+    networks:
+      - demo-webflux-network
+
+networks:
+  demo-webflux-network:
+    driver: bridge

@@ -1,11 +1,15 @@
 spring:
   config:
     activate:
-      on-profile: "local"
+      on-profile: "docker"
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/demo_webflux
+      uri: mongodb://mongodb:27017/demo_webflux
+#      maxConnectionIdleTime: 15000
+#      connectionsPerHost: 40
+#      minConnectionsPerHost: 1
+#      socketTimeout: 60000
 
 logging:
   level:
