@@ -5,11 +5,9 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/demo_webflux
-#      maxConnectionIdleTime: 15000
-#      connectionsPerHost: 40
-#      minConnectionsPerHost: 1
-#      socketTimeout: 60000
+      uri: mongodb://localhost:27017/demo_webflux?retryWrites=true&w=majority&maxPoolSize=100&maxIdleTimeMS=120000
+
+      # https://www.mongodb.com/docs/manual/administration/connection-pool-overview/#:~:text=mongos%20routers%20have%20connection%20pools%20for%20each%20node%20in%20the%20cluster.
 
 logging:
   level:

@@ -1,6 +1,0 @@
-
-https://springdoc.org/#spring-webfluxwebmvc-fn-with-functional-endpoints
-
-https://medium.com/walmartglobaltech/swagger-implementation-for-webflux-functional-programming-model-8ac55bfce2be
-
-

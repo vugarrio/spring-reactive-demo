@@ -14,7 +14,7 @@ mvn clean install
 docker-compose -f docker/docker-compose.yml config
 
 # Then we can build our images, create the defined containers, and start it in one command:
-docker/docker-compose.yml --project-name "spring-reactive-demo" up --build -d
+docker-compose -f docker/docker-compose.yml --project-name "spring-reactive-demo" up --build -d
 ```
 
 
