@@ -21,6 +21,7 @@ spring:
       use-root-path: true
 
 
+
 info:
   app:
     name: "@project.name@"

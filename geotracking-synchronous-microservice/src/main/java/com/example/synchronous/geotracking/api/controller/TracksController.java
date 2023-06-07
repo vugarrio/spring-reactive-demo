@@ -6,6 +6,7 @@ import com.example.synchronous.geotracking.dto.GeoPointResponseDTO;
 import com.example.synchronous.geotracking.dto.TrackDTO;
 import com.example.synchronous.geotracking.dto.TrackRefDTO;
 import com.example.synchronous.geotracking.service.GeoPointService;
+import com.example.synchronous.geotracking.service.LazyService;
 import com.example.synchronous.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +29,21 @@ public class TracksController implements TracksApi {
 
     private final GeoPointService geoPointService;
 
+    private final LazyService lazyService;
+
     @Override
     public ResponseEntity<TrackRefDTO> processTrack(TrackDTO trackDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(geoPointService.processTrack(trackDTO));
     }
 
     @Override
-    public ResponseEntity<GeoPointResponseDTO> getLastPosition(String user, String deviceId) {
+    public ResponseEntity<GeoPointResponseDTO> getLastPosition(String user, String deviceId, Integer testLazyTime) {
         GeoPointResponseDTO lastPositionByDeviceId = null;
+
+        if (testLazyTime != null && testLazyTime > 0 ) {
+            lazyService.sleep(testLazyTime);
+        }
+
         if (!StringUtils.isEmpty(deviceId)) {
             lastPositionByDeviceId = geoPointService.getLastPositionByDeviceId(deviceId);
 
@@ -45,7 +53,7 @@ public class TracksController implements TracksApi {
         } else throw new ParameterException("Some parameter does not have to be empty");
 
         if (Objects.isNull(lastPositionByDeviceId)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(lastPositionByDeviceId);
         }

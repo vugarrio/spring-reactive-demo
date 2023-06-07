@@ -38,11 +38,11 @@ services:
     deploy:
       resources:
         limits:
+          cpus: '1'
+          memory: 2048M
+        reservations:
           cpus: '0.50'
           memory: 1024M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
 
 
 
@@ -65,11 +65,11 @@ services:
     deploy:
       resources:
         limits:
+          cpus: '1'
+          memory: 2048M
+        reservations:
           cpus: '0.50'
           memory: 1024M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
 
 
   geotracking-synchronous-service:
@@ -90,11 +90,11 @@ services:
     deploy:
       resources:
         limits:
+          cpus: '1'
+          memory: 2048M
+        reservations:
           cpus: '0.50'
           memory: 1024M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
 
 networks:
   demo-webflux-network:

@@ -62,7 +62,8 @@ public class TracksRlouter {
 
                     parameters = {
                             @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = false),
-                            @Parameter(in = ParameterIn.QUERY, name = "deviceId", description = "Device Id", required = false)
+                            @Parameter(in = ParameterIn.QUERY, name = "deviceId", description = "Device Id", required = false),
+                            @Parameter(in = ParameterIn.QUERY, name = "testLazyTime", description = "Time in seconds that the service is lazy", required = false)
                     },
 
                     responses = {
