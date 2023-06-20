@@ -56,14 +56,13 @@ public class TracksRlouter {
     @RouterOperation(
             operation = @Operation(
                     operationId = "getLastPosition",
-                    summary = "Get the last position of a device or user",
-                    description = "Get the last position of a device, you can filter by user or by deviceId. But it is mandatory to filter by one of the two parameters.",
+                    summary = "Get the last position of a user",
+                    description = "Get the last position of a user",
                     tags = { "Tracking" },
 
                     parameters = {
                             @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = false),
-                            @Parameter(in = ParameterIn.QUERY, name = "deviceId", description = "Device Id", required = false),
-                            @Parameter(in = ParameterIn.QUERY, name = "testLazyTime", description = "Time in seconds that the service is lazy", required = false)
+                            @Parameter(in = ParameterIn.HEADER, name = "testLazyTime", description = "Time in seconds that the service is lazy", required = false)
                     },
 
                     responses = {

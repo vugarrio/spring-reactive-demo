@@ -35,7 +35,36 @@ docker-compose -f docker/docker-compose.yml --project-name "spring-reactive-demo
 
 # Create and start containers
 docker-compose -f docker/docker-compose.yml --project-name "spring-reactive-demo" up -d
+
+# Returns a live data stream for running containers
+docker stats
 ```
+
+## Observabilidad con Prometehus + Grafana
+
+```bash
+# Build or rebuild services
+docker-compose -f docker/docker-compose-observability.yml --project-name "spring-reactive-demo" build
+
+# Create and start containers
+docker-compose -f docker/docker-compose-observability.yml --project-name "spring-reactive-demo" up -d
+
+# Stop services
+docker-compose -f docker/docker-compose-observability.yml --project-name "spring-reactive-demo" stop
+
+# Start service
+docker-compose -f docker/docker-compose-observability.yml --project-name "spring-reactive-demo" start
+
+# Stop and remove containers, networks
+docker-compose -f docker/docker-compose-observability.yml --project-name "spring-reactive-demo" down
+
+# Prometheus panel web
+http://localhost:9090/targets
+
+# Grafana panel web
+http://localhost:3000/explore 
+```
+
 
 ## Swagger API
 

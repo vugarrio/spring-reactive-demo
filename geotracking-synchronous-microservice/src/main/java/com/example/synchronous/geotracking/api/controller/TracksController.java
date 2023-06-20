@@ -37,27 +37,21 @@ public class TracksController implements TracksApi {
     }
 
     @Override
-    public ResponseEntity<GeoPointResponseDTO> getLastPosition(String user, String deviceId, Integer testLazyTime) {
-        GeoPointResponseDTO lastPositionByDeviceId = null;
+    public ResponseEntity<GeoPointResponseDTO> getLastPosition(String user, Integer testLazyTime) {
 
-        if (testLazyTime != null && testLazyTime > 0 ) {
+        // Call a lazy service to sleep the indicated
+        if (Objects.nonNull(testLazyTime)) {
             lazyService.sleep(testLazyTime);
         }
 
-        if (!StringUtils.isEmpty(deviceId)) {
-            lastPositionByDeviceId = geoPointService.getLastPositionByDeviceId(deviceId);
-
-        } else if (!StringUtils.isEmpty(user)) {
-            lastPositionByDeviceId = geoPointService.getLastPositionByUser(user);
-
-        } else throw new ParameterException("Some parameter does not have to be empty");
+        // Get last position
+        GeoPointResponseDTO lastPositionByDeviceId = geoPointService.getLastPositionByUser(user);
 
         if (Objects.isNull(lastPositionByDeviceId)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(lastPositionByDeviceId);
         }
-
     }
 
     @Override

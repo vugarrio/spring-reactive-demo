@@ -96,24 +96,26 @@ paths:
         get:
             tags:
                 - Tracking
-            summary: Get the last position of a device or user
-            description: Get the last position of a device, you can filter by user or by deviceId. But it is mandatory to filter by one of the two parameters.
+            summary: Get the last position of a user
+            description: Get the last position of a user.
             operationId: getLastPosition
             parameters:
+                -   name: testLazyTime
+                    in: header
+                    description: Time in seconds that the service is lazy.
+                    required: false
+                    schema:
+                        type: integer
+                        default: 0
+                    example: 5
+
                 -   name: user
                     in: query
                     description: User Id
-                    required: false
+                    required: true
                     schema:
                         type: string
-                    example: W99999
-                -   name: deviceId
-                    in: query
-                    description: Divice Id
-                    required: false
-                    schema:
-                        type: string
-                    example: 1111222XXXXXXX                    
+                    example: X00005
 
             responses:
                 "200":

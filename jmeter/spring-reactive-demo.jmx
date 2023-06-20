@@ -254,7 +254,7 @@
                 </elementProp>
                 <elementProp name="testLazyTime" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">10</stringProp>
+                  <stringProp name="Argument.value">15</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">testLazyTime</stringProp>
@@ -688,7 +688,7 @@
                 </elementProp>
                 <elementProp name="testLazyTime" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">10</stringProp>
+                  <stringProp name="Argument.value">15</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">testLazyTime</stringProp>

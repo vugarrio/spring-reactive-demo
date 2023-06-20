@@ -1,11 +1,12 @@
 package com.example.reactive.annotation.geotracking.api.controller;
 
 import com.example.reactive.annotation.geotracking.api.TracksApi;
-import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import com.example.reactive.annotation.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackRefDTO;
 import com.example.reactive.annotation.geotracking.service.GeoPointService;
+import com.example.reactive.annotation.geotracking.service.LazyService;
+import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ public class  TracksController implements TracksApi {
 
     private final GeoPointService geoPointService;
 
+    private final LazyService lazyService;
+
     /**
      * {@inheritDoc}
      */
@@ -37,18 +40,14 @@ public class  TracksController implements TracksApi {
      * {@inheritDoc}
      */
     @Override
-    public Mono<ResponseEntity<GeoPointResponseDTO>> getLastPosition(String user, String deviceId, ServerWebExchange exchange) {
-        if (!StringUtils.isEmpty(deviceId)) {
-            return geoPointService.getLastPositionByDeviceId(deviceId)
-                    .map(ResponseEntity::ok)
-                    .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+    public Mono<ResponseEntity<GeoPointResponseDTO>> getLastPosition(String user, Integer testLazyTime, ServerWebExchange exchange) {
+        // Call a lazy service to sleep the indicated
+        Mono<Integer> lazy = lazyService.sleep(testLazyTime).thenReturn(testLazyTime);
 
-        } else if (!StringUtils.isEmpty(user)) {
-            return geoPointService.getLastPositionByUser(user)
-                    .map(ResponseEntity::ok)
-                    .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NO_CONTENT));
-
-        } else throw new ServerWebInputException("Some parameter does not have to be empty");
+        // Get last position
+        return  lazy.flatMap( t ->geoPointService.getLastPositionByUser(user))
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 
     /**
@@ -63,13 +62,5 @@ public class  TracksController implements TracksApi {
                 .build();
 
         return Mono.just(ResponseEntity.ok(geoPointService.findGeoPointByParameters(criteria)));
-
-// todo: borrar antes de merger
-//        return geoPointService.findGeoPointByParameters(criteria)
-//                .collectList()
-//                .flatMap(list -> list.isEmpty()
-//                        ? Mono.just(ResponseEntity.noContent().build())
-//                        : Mono.just(ResponseEntity.ok().body(Flux.fromIterable(list))));
-
     }
 }

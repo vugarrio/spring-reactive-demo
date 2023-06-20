@@ -1,6 +1,6 @@
-package com.example.reactive.functional.geotracking.service.impl;
+package com.example.reactive.annotation.geotracking.service.impl;
 
-import com.example.reactive.functional.geotracking.service.LazyService;
+import com.example.reactive.annotation.geotracking.service.LazyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

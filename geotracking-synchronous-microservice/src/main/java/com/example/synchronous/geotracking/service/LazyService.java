@@ -9,4 +9,5 @@ public interface LazyService {
      */
     String sleep(long time);
 
+
 }
