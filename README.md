@@ -78,3 +78,12 @@ http://localhost:8082/swagger-ui.html
 # API documentation for geotracking-synchronous-microservice
 http://localhost:8083/swagger-ui.html
 ```
+
+## Resultado de los test
+
+Las pruebas se han realizado con jMeter ejecutando en todas la pruebas 800 threads durante 10s. Cada threads ejecutaba dos peticiones:
+- Una peticion POST, que guarda el tracking de un usuario.
+- Una peticion GET, que devuelve la ultima posicion de un usuario. Esta peticion pude llamar a un proceso perezoso, 
+  al que a traves del parametro "testLazyTime" en el header, donde se le indica el tiempo en segundos
+  que el servicio tiene que ponerse a dormir, simulando el retardo de llamadas a procesos externos.
+
