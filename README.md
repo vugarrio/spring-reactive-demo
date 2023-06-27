@@ -79,11 +79,79 @@ http://localhost:8082/swagger-ui.html
 http://localhost:8083/swagger-ui.html
 ```
 
-## Resultado de los test
+## Pruebas de rendimiento
 
-Las pruebas se han realizado con jMeter ejecutando en todas la pruebas 800 threads durante 10s. Cada threads ejecutaba dos peticiones:
+Las pruebas se han realizado con jMeter, cada prueba consta de una ejecucion lanzando 800 threads durante 10s. Cada threads ejecutaba dos peticiones consecutivas:
 - Una peticion POST, que guarda el tracking de un usuario.
-- Una peticion GET, que devuelve la ultima posicion de un usuario. Esta peticion pude llamar a un proceso perezoso, 
-  al que a traves del parametro "testLazyTime" en el header, donde se le indica el tiempo en segundos
-  que el servicio tiene que ponerse a dormir, simulando el retardo de llamadas a procesos externos.
+- Una peticion GET, que devuelve la ultima posicion de un usuario. A esta petición se le puede indicar a traves del parámetro "testLazyTime" en el header, que simule una llamada a un servicio externo que tarde en responder los segundos indicados. De esta foma podemos simular casos en los que una petición depende de llamadas a otros servicios o APIS externas que tardan en responder.
 
+Se hace una prueba en cada micro. La llamada es la misma para cada micro pero ciambiando el puerto.
+
+```bash
+# Microservicio reactivo funcional (puerto: 8081)
+curl --location 'http://localhost:8081/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
+
+# Microservicio reactivo con anotaciones (puerto: 8082)
+curl --location 'http://localhost:8082/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
+
+# Microservicio sycrono (puerto: 8083)
+curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
+```
+
+
+### Escenarios que se realizan las pruebas
+
+1. Situción ideal: el proceso externo es rápido
+2. El proceso externo es un poco lento
+3. El proceso exteerno es lento
+3. El proceso externo es muy lengo.
+
+
+Manos a la obra:
+
+
+### 1. Situción ideal: el proceso externo es rápido
+
+```bash
+# Indicamos al servicio perezoso que no se pare y sea rapido en su respuesta
+
+curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
+```
+Resultados: 
+![Resultado 1](./jmeter/results/resultado_prueba_ideal.png)
+
+
+
+### 2. El proceso externo es un poco lento
+
+```bash
+# Indicamos al servicio perezoso que tarde en responder 3 segundos
+
+curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 3'
+```
+
+Resultados: 
+![Resultado 2](./jmeter/results/resultado_prueba_2.png)
+
+
+### 3. El proceso externo es lento
+
+```bash
+# Indicamos al servicio perezoso que tarde en responder 5 segundos
+
+curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 5'
+```
+
+Resultados: 
+![Resultado 2](./jmeter/results/resultado_prueba_3.png)
+
+### 3. El proceso externo es muy lento
+
+```bash
+# Indicamos al servicio perezoso que tarde en responder 10 segundos
+
+curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 10'
+```
+
+Resultados: 
+![Resultado 2](./jmeter/results/resultado_prueba_4.png)
