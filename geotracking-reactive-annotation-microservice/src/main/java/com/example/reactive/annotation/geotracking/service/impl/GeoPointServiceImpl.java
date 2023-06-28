@@ -42,7 +42,6 @@ public class GeoPointServiceImpl implements GeoPointService {
         Flux<GeoPoint> savedGeos = geoPointRepository.saveAll(
                 track.getPoints()
                         .stream()
-                        //.filter(geoPoint -> geoPoint.isSave())
                         .map(geoPoint->{
                             GeoPoint gp = geoPointconverter.toEntity(geoPoint);
                             gp.setUser(track.getUser());
@@ -55,8 +54,7 @@ public class GeoPointServiceImpl implements GeoPointService {
                 )
                 .onErrorResume(e->Mono.error(GeoPointServiceException::new));
 
-        return savedGeos.then(Mono.just(trackRefDTO)
-        );
+        return savedGeos.then(Mono.just(trackRefDTO));
     }
 
     @Override

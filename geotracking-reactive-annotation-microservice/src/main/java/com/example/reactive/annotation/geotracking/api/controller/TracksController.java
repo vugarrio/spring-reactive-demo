@@ -8,12 +8,10 @@ import com.example.reactive.annotation.geotracking.service.GeoPointService;
 import com.example.reactive.annotation.geotracking.service.LazyService;
 import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.ServerWebInputException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

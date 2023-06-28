@@ -56,9 +56,7 @@ public class GeoPointServiceImpl implements GeoPointService {
                 .onErrorResume(e->Mono.error(GeoPointServiceException::new));
 
 
-        return savedGeos.then(
-                Mono.just(trackRefDTO)
-        );
+        return savedGeos.then(Mono.just(trackRefDTO));
     }
 
     @Override
