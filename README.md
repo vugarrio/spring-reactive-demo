@@ -123,7 +123,7 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 Resultados: 
 ![Resultado 1](./jmeter/results/resultado_prueba_ideal.png)
 
-Los tiempos entre reactivos y sincronos es practicamente el mismo.
+Los tiempos entre reactivos y sincrono es practicamente el mismo.
 
 ### 2. El proceso externo es un poco lento
 
@@ -165,7 +165,7 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 Resultados: 
 ![Resultado 4](./jmeter/results/resultado_prueba_4.png)
 
-En este caso, el microservicio sincrono se resiente mucho mas que los reactivos. El sincrono empieza a generar errores y a tardar mas del doble del tiempo en procesar todas las peticiones, ademas ya empieza afectar al redimiento de las otras operaciones de post. En cambio, los reactivos consiguen procesar todas las peticiones.
+En este caso, el microservicio sincrono se resiente mucho mas que los reactivos. El sincrono empieza a generar errores y a tardar mas del doble del tiempo en procesar todas las peticiones, ademas ya empieza afectar al redimiento de las otras operaciones de post. En cambio, los reactivos consiguen procesar todas las peticiones, sin afectar al rendimiento de las otras peticiones post.
 
 ## Conclusión
 
