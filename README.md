@@ -1,4 +1,4 @@
-# Spring Boot Microservices
+# Spring Reactive Demo
 
 Este es un ejemplo para ver un microservicio de Geo-tracking implementado de tres formas: reactiva funcional, reactiva con anotaciones y de forma sincrona.
 
