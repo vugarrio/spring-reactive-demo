@@ -104,10 +104,13 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 1. Situción ideal: el proceso externo es rápido
 2. El proceso externo es un poco lento
 3. El proceso exteerno es lento
-3. El proceso externo es muy lengo.
+4. El proceso externo es muy lengo.
 
 
-Manos a la obra:
+Manos a la obra con jMeter:
+
+![Resultado 2](./jmeter/results/jmeter_plan_pruebas.png)
+
 
 
 ### 1. Situción ideal: el proceso externo es rápido
@@ -143,9 +146,9 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 ```
 
 Resultados: 
-![Resultado 2](./jmeter/results/resultado_prueba_3.png)
+![Resultado 3](./jmeter/results/resultado_prueba_3.png)
 
-### 3. El proceso externo es muy lento
+### 4. El proceso externo es muy lento
 
 ```bash
 # Indicamos al servicio perezoso que tarde en responder 10 segundos
@@ -154,4 +157,9 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 ```
 
 Resultados: 
-![Resultado 2](./jmeter/results/resultado_prueba_4.png)
+![Resultado 4](./jmeter/results/resultado_prueba_4.png)
+
+
+## Conclusión
+
+Hemos visto en un entorno ideal apenas hay diferencia entre un microservicio reactivo a uno sincrono. Donde si se ven las diferencias es conforme vamos teniendo procesos externos que relentiza las operaciones, llegando al caso mas desfavorable, donde ademas de tardar mucho mas en finalizar todas las operaciones el microservicio sincrono, no es capaz de finalizar todos los procesos correctamente como si ocurre en el microservicio reactivo.
