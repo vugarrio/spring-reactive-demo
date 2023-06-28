@@ -70,7 +70,7 @@ curl --location 'http://localhost:8081/tracks/lastPosition?user=X00005' --header
 # Microservicio reactivo con anotaciones (puerto: 8082)
 curl --location 'http://localhost:8082/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
 
-# Microservicio sycrono (puerto: 8083)
+# Microservicio sincrono (puerto: 8083)
 curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header 'testLazyTime: 0'
 ```
 
