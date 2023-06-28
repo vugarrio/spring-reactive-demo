@@ -55,7 +55,7 @@ paths:
                     required: true
                     schema:
                         type: string
-                    example: W99999
+                    example: X00005
                 -   name: dateFrom
                     in: query
                     description: Track start date
@@ -63,7 +63,7 @@ paths:
                     schema:
                         type: string
                         format: date-time
-                    example: "1975-07-05T07:30:00Z"
+                    example: "2023-06-29T08:30:00Z"
                 -   name: dateTo
                     in: query
                     description: Track start date
@@ -71,7 +71,7 @@ paths:
                     schema:
                         type: string
                         format: date-time
-                    example: "1975-07-05T07:30:00Z"
+                    example: "2023-06-29T23:30:00Z"
 
             responses:
                 "200":
@@ -148,11 +148,11 @@ components:
                 deviceId:
                     description: id device sent the track
                     type: string
-                    example: 1111222XXXXXXX
+                    example: "iPhone Vixxx3490"
                 user:
                     description: User of the tracking
                     type: string
-                    example: W99999
+                    example: X00005
                 points:
                     description: GeoPoins of the tracking. Minimum of 2 Points required
                     type: array
@@ -171,7 +171,7 @@ components:
                     description: timestamp of the GeoPoint.
                     type: string
                     format: date-time
-                    example: 1975-07-05T07:30:00Z
+                    example: 2023-06-29T14:30:00Z
                 point:
                     $ref: '#/components/schemas/Geolocation'
 
@@ -216,124 +216,19 @@ components:
                 user:
                     description: User of the tracking
                     type: string
-                    example: W99999
+                    example: X00005
                 deviceId:
                     description: id device sent the track
                     type: string
-                    example: 1111222XXXXXXX
+                    example: iPhone Vixxx3490
                 timestamp:
                     description: timestamp of the GeoPoint.
                     type: string
                     format: date-time
-                    example: 1975-07-05T07:30:00Z
+                    example: 2023-06-29T14:30:00Z
                 point:
                     $ref: '#/components/schemas/Geolocation'
 
-
-                      # TrackResponse:
-                      #     description: Return one GeoPoint user item
-                      #     type: object
-                      #     properties:
-                      #         user:
-                      #             description: User of the tracking
-                      #             type: string
-                      #             example: W99999
-                      #         points:
-                      #             description: GeoPoins of the tracking
-                      #             type: array
-                      #             minItems: 2
-                      #             items:
-                    #                 $ref: '#/components/schemas/GeoPointResponse'
-
-
-        # GeoPointResponse:
-        #     description: geo point
-        #     type: object
-        #     properties:
-        #         id:
-        #             description: GeoPoint identifier
-        #             type: string
-        #             example: 641b94f35188c84d89373e99
-        #         deviceId:
-        #             description: id device sent the track
-        #             type: string
-        #             example: 1111222XXXXXXX
-        #         timestamp:
-        #             description: timestamp of the GeoPoint.
-        #             type: string
-        #             format: date-time
-        #             example: 1975-07-05T07:30:00Z
-        #         point:
-        #             $ref: '#/components/schemas/Geolocation'
-
-
-        # todo: eliminar
-        # Audit:
-        #     description: Audit data
-        #     type: object
-        #     properties:
-        #         modifiedBy:
-        #             description: User who made the last modification on the entity
-        #             type: string
-        #             example: W99999
-        #         modifiedAt:
-        #             description: Last modification date
-        #             type: string
-        #             format: date-time
-        #             example: 1975-07-05T07:30:00Z
-        #         createdBy:
-        #             description: The user id who created de entity
-        #             type: string
-        #             example: W99999
-        #         createdAt:
-        #             description: Creation date
-        #             type: string
-        #             format: date-time
-        #             example: 1975-07-05T07:30:00Z
-
-
-
-
-        # Pagination todo:eliminar
-        # Pagination:
-        #     description: Pagination information. In the case that the payload of the response includes several pages of results
-        #     type: object
-        #     properties:
-        #         page:
-        #             type: integer
-        #             description: Index of the current page
-        #             example: 2
-        #         size:
-        #             type: integer
-        #             description: Number of items per page
-        #             example: 10
-        #         totalElements:
-        #             type: integer
-        #             format: int64
-        #             description: Total number of items found
-        #             example: 25
-        #         totalPages:
-        #             type: integer
-        #             description: Total number of pages found
-        #             example: 3
-        #         numberOfElements:
-        #             type: integer
-        #             description: Number of items on the current page
-        #             example: 5
-        #         next:
-        #             description: Pagination key or index of the next page of results
-        #             type: integer
-        #             example: 2
-        #         previous:
-        #             description: Pagination key or index of the previous page of results
-        #             type: integer
-        #             example: 1
-        #         sort:
-        #             description: Pagination sorting criteria
-        #             type: array
-        #             items:
-        #                 type: string
-        #             example: ["date.desc","title.asc"]
 
 
         Error:

@@ -18,13 +18,4 @@ public class LazyServiceImpl implements LazyService {
 
     }
 
-
-    private String blockingFunction(long time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return "Sleep " + time + " seconds";
-    }
 }

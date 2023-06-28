@@ -26,7 +26,6 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class TracksRlouter {
 
-
     @Bean
     @RouterOperation(
             operation = @Operation(
@@ -50,8 +49,6 @@ public class TracksRlouter {
         return RouterFunctions.route(POST("/tracks").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)), tracksHandler::processTrack);
     }
 
-
-
     @Bean
     @RouterOperation(
             operation = @Operation(
@@ -61,7 +58,7 @@ public class TracksRlouter {
                     tags = { "Tracking" },
 
                     parameters = {
-                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = false),
+                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = false, example = "X00005"),
                             @Parameter(in = ParameterIn.HEADER, name = "testLazyTime", description = "Time in seconds that the service is lazy", required = false)
                     },
 
@@ -83,9 +80,9 @@ public class TracksRlouter {
                     summary = "Get the track of a user in a time interval",
                     tags = { "Tracking" },
                     parameters = {
-                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = true),
-                            @Parameter(in = ParameterIn.QUERY, name = "dateFrom", description = "Track start date", required = true, example = "2021-07-05T07:30:00Z"),
-                            @Parameter(in = ParameterIn.QUERY, name = "dateTo", description = "Track end date", required = true, example = "2021-07-05T18:30:00Z")
+                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = true, example = "X00005"),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateFrom", description = "Track start date", required = true, example = "2023-06-29T08:30:00Z"),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateTo", description = "Track end date", required = true, example = "2023-06-29T23:30:00Z")
 
                     },
                     responses = {
@@ -105,9 +102,9 @@ public class TracksRlouter {
                     summary = "Get the track stream of a user in a time interval",
                     tags = { "Tracking" },
                     parameters = {
-                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = true),
-                            @Parameter(in = ParameterIn.QUERY, name = "dateFrom", description = "Track start date", required = true, example = "2021-07-05T07:30:00Z"),
-                            @Parameter(in = ParameterIn.QUERY, name = "dateTo", description = "Track end date", required = true, example = "2021-07-05T18:30:00Z")
+                            @Parameter(in = ParameterIn.QUERY, name = "user", description = "User Id", required = true, example = "X00005"),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateFrom", description = "Track start date", required = true, example = "2023-06-29T08:30:00Z"),
+                            @Parameter(in = ParameterIn.QUERY, name = "dateTo", description = "Track end date", required = true, example = "2023-06-29T23:30:00Z")
 
                     },
                     responses = {

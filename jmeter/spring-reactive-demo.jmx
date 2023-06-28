@@ -277,7 +277,7 @@
                 </elementProp>
                 <elementProp name="" elementType="Header">
                   <stringProp name="Header.name">testLazyTime</stringProp>
-                  <stringProp name="Header.value">0</stringProp>
+                  <stringProp name="Header.value">10</stringProp>
                 </elementProp>
               </collectionProp>
               <stringProp name="TestPlan.comments">Created from cURL on 2023-04-27T16:50:51.366754</stringProp>
@@ -1053,7 +1053,7 @@
                 </elementProp>
                 <elementProp name="" elementType="Header">
                   <stringProp name="Header.name">testLazyTime</stringProp>
-                  <stringProp name="Header.value">0</stringProp>
+                  <stringProp name="Header.value">10</stringProp>
                 </elementProp>
               </collectionProp>
               <stringProp name="TestPlan.comments">Created from cURL on 2023-04-27T16:50:51.366754</stringProp>

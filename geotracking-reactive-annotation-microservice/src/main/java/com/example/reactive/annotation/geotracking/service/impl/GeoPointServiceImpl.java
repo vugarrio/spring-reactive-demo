@@ -39,22 +39,22 @@ public class GeoPointServiceImpl implements GeoPointService {
         trackRefDTO.setTrackId(trackId);
 
         //Persists tracking
-        Flux<GeoPoint> savedGeos = geoPointRepository.saveAll(
-                track.getPoints()
-                        .stream()
-                        .map(geoPoint->{
-                            GeoPoint gp = geoPointconverter.toEntity(geoPoint);
-                            gp.setUser(track.getUser());
-                            gp.setTrackId(trackId);
-                            gp.setDeviceId(track.getDeviceId());
-                            gp.setCreateAt(Instant.now());
-                            return gp;
-                        })
-                        .collect(Collectors.toList())
+        return geoPointRepository.saveAll(
+                        track.getPoints()
+                                .stream()
+                                .map(geoPoint->{
+                                    GeoPoint gp = geoPointconverter.toEntity(geoPoint);
+                                    gp.setUser(track.getUser());
+                                    gp.setTrackId(trackId);
+                                    gp.setDeviceId(track.getDeviceId());
+                                    gp.setCreateAt(Instant.now());
+                                    return gp;
+                                })
+                                .collect(Collectors.toList())
                 )
-                .onErrorResume(e->Mono.error(GeoPointServiceException::new));
-
-        return savedGeos.then(Mono.just(trackRefDTO));
+                .onErrorResume(e->Mono.error(GeoPointServiceException::new))
+                .count()
+                .then(Mono.just(trackRefDTO));
     }
 
     @Override
