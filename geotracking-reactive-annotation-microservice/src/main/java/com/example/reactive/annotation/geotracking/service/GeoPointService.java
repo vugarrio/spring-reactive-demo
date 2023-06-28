@@ -1,9 +1,9 @@
 package com.example.reactive.annotation.geotracking.service;
 
-import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import com.example.reactive.annotation.geotracking.dto.GeoPointResponseDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackDTO;
 import com.example.reactive.annotation.geotracking.dto.TrackRefDTO;
+import com.example.reactive.annotation.geotracking.service.dto.SearchTrackByCriteria;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

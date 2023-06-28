@@ -8,7 +8,6 @@ import com.example.reactive.functional.geotracking.dto.TrackDTO;
 import com.example.reactive.functional.geotracking.dto.TrackRefDTO;
 import com.example.reactive.functional.geotracking.exception.GeoPointServiceException;
 import com.example.reactive.functional.geotracking.service.GeoPointService;
-import com.example.reactive.functional.geotracking.service.LazyService;
 import com.example.reactive.functional.geotracking.service.converter.GeoPointConverter;
 import com.example.reactive.functional.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;

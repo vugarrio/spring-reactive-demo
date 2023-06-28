@@ -16,7 +16,6 @@ public class OpenAPIConfiguration {
     public OpenAPI customOpenAPI(@Value("${info.app.version}") String appVersion) {
         return new OpenAPI()
 
-            // TODO: pendiente de actualizar info
                 .info(new Info()
                 .title("Geo-tracking Service API")
                 .description("API documentation for geotracking-reactive-annotation-microservice")

@@ -69,20 +69,6 @@
 		</dependency>		
 			
 
-<!--		Todo: eliminar-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.data</groupId>-->
-<!--			<artifactId>spring-data-commons</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>jakarta.xml.bind</groupId>-->
-<!--			<artifactId>jakarta.xml.bind-api</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.fasterxml.jackson.datatype</groupId>-->
-<!--			<artifactId>jackson-datatype-jsr310</artifactId>-->
-<!--		</dependency>-->
-
 		<!-- SpringDoc OpenAPI3 -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -211,19 +197,11 @@
 							<inputSpec>${project.basedir}/src/main/resources/openapi/geotracking-definitions.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<templateDirectory>src/main/resources/openapi/templates</templateDirectory>
-<!--							<generateApiDocumentation>false</generateApiDocumentation>-->
-<!--							<generateSupportingFiles>true</generateSupportingFiles>-->
-<!--							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
-<!--							<generateModels>true</generateModels>-->
-<!--							<generateApis>true</generateApis>-->
 							<modelNameSuffix>DTO</modelNameSuffix>
 							<configOptions>
 								<reactive>true</reactive>
-<!--								<dateLibrary>java8</dateLibrary>-->
 								<interfaceOnly>true</interfaceOnly>
 								<skipDefaultInterface>true</skipDefaultInterface>
-<!--								<hideGenerationTimestamp>true</hideGenerationTimestamp>-->
-<!--								<library>spring-boot</library>-->
 							</configOptions>
 							<apiPackage>${project.groupId}.reactive.annotation.geotracking.api</apiPackage>
 							<modelPackage>${project.groupId}.reactive.annotation.geotracking.dto</modelPackage>

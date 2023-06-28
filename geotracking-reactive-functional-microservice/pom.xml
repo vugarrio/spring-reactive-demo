@@ -197,17 +197,13 @@
 							<templateDirectory>src/main/resources/openapi/templates</templateDirectory>
 							<generateApiDocumentation>false</generateApiDocumentation>
 							<generateSupportingFiles>false</generateSupportingFiles>
-<!--							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
 							<generateModels>true</generateModels>
 							<generateApis>false</generateApis>
 							<modelNameSuffix>DTO</modelNameSuffix>
 							<configOptions>
 								<reactive>true</reactive>
-<!--								<dateLibrary>java8</dateLibrary>-->
 								<interfaceOnly>true</interfaceOnly>
 								<skipDefaultInterface>true</skipDefaultInterface>
-<!--								<hideGenerationTimestamp>true</hideGenerationTimestamp>-->
-<!--								<library>spring-boot</library>-->
 							</configOptions>
 							<modelPackage>${project.groupId}.reactive.functional.geotracking.dto</modelPackage>
 						</configuration>

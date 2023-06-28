@@ -63,12 +63,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- SpringDoc OpenAPI3 -->
-<!--		<dependency>-->
-<!--			<groupId>org.springdoc</groupId>-->
-<!--			<artifactId>springdoc-openapi-webflux-core</artifactId>-->
-<!--			<version>${springdoc-openapi.version}</version>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
@@ -191,7 +185,6 @@
 							<inputSpec>${project.basedir}/src/main/resources/openapi/geotracking-definitions.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<templateDirectory>src/main/resources/openapi/templates</templateDirectory>
-							<!--							<generateApiDocumentation>false</generateApiDocumentation>-->
 							<generateSupportingFiles>true</generateSupportingFiles>
 							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
 							<generateModels>true</generateModels>
@@ -199,11 +192,8 @@
 							<modelNameSuffix>DTO</modelNameSuffix>
 							<configOptions>
 								<reactive>false</reactive>
-								<!--								<dateLibrary>java8</dateLibrary>-->
 								<interfaceOnly>true</interfaceOnly>
 								<skipDefaultInterface>true</skipDefaultInterface>
-								<!--								<hideGenerationTimestamp>true</hideGenerationTimestamp>-->
-								<!--								<library>spring-boot</library>-->
 							</configOptions>
 							<apiPackage>${project.groupId}.synchronous.geotracking.api</apiPackage>
 							<modelPackage>${project.groupId}.synchronous.geotracking.dto</modelPackage>

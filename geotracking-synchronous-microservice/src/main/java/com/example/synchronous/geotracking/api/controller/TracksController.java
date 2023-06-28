@@ -1,7 +1,6 @@
 package com.example.synchronous.geotracking.api.controller;
 
 import com.example.synchronous.geotracking.api.TracksApi;
-import com.example.synchronous.geotracking.api.exception.ParameterException;
 import com.example.synchronous.geotracking.dto.GeoPointResponseDTO;
 import com.example.synchronous.geotracking.dto.TrackDTO;
 import com.example.synchronous.geotracking.dto.TrackRefDTO;
@@ -10,7 +9,6 @@ import com.example.synchronous.geotracking.service.LazyService;
 import com.example.synchronous.geotracking.service.dto.SearchTrackByCriteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
