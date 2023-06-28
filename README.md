@@ -162,4 +162,4 @@ Resultados:
 
 ## Conclusión
 
-Hemos visto en un entorno ideal apenas hay diferencia entre un microservicio reactivo a uno sincrono. Donde si se ven las diferencias es conforme vamos teniendo procesos externos que relentiza las operaciones, llegando al caso mas desfavorable, donde ademas de tardar mucho mas en finalizar todas las operaciones el microservicio sincrono, no es capaz de finalizar todos los procesos correctamente como si ocurre en el microservicio reactivo.
+Hemos visto en un entorno ideal apenas hay diferencia entre un microservicio reactivo a uno sincrono. Donde si se ven las diferencias es conforme vamos teniendo procesos externos que relentizan las operaciones, llegando al caso mas desfavorable, donde ademas de tardar mucho mas en finalizar todas las operaciones el microservicio sincrono, no es capaz de finalizar todos los procesos correctamente como si ocurre en el microservicio reactivo.
