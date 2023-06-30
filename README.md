@@ -77,7 +77,7 @@ curl --location 'http://localhost:8083/tracks/lastPosition?user=X00005' --header
 
 ### Escenarios que se realizan las pruebas.
 
-Vaomos a suponer que puede existe uno o varios procesos externos con los que interactua nuestro microservicio, como por ejemplo una llamada al API de otro microservicio o un legacy.
+Vaomos a suponer que puede existir uno o varios procesos externos con los que interactua nuestro microservicio, como por ejemplo una llamada al API de otro microservicio o un legacy.
 
 1. Situción ideal: el proceso externo es rápido
 2. El proceso externo es un poco lento
